@@ -1,5 +1,4 @@
-import { AppLoading } from 'expo';
-import { Asset } from 'expo-asset';
+import { AppLoading, Asset } from 'expo';
 import * as Font from 'expo-font';
 import React, { useState } from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';

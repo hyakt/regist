@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "gist-app",
-    "slug": "gist-app",
+    "name": "regist",
+    "slug": "regist",
     "privacy": "public",
     "sdkVersion": "33.0.0",
     "platforms": [
@@ -24,6 +24,7 @@
       "**/*"
     ],
     "ios": {
+      "bundleIdentifier": "com.hyakt.regist",
       "supportsTablet": true
     }
   }
