@@ -1,9 +1,8 @@
 import React from 'react'
-import { Image } from 'react-native'
+import { Image, FlatList } from 'react-native'
 import {
   Text,
   Container,
-  List,
   ListItem,
   Content
 } from 'native-base'
@@ -41,7 +40,7 @@ export default class SideBar extends React.Component {
                 'https://raw.githubusercontent.com/GeekyAnts/NativeBase-KitchenSink/master/assets/logo.png'
             }}
           />
-          <List
+          <FlatList
             dataArray={routes}
             contentContainerStyle={{ marginTop: 120 }}
             renderRow={data => {
