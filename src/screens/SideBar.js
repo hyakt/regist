@@ -1,31 +1,30 @@
-import React from "react";
-import { AppRegistry, Image, StatusBar } from "react-native";
+import React from 'react'
+import { Image } from 'react-native'
 import {
-  Button,
   Text,
   Container,
   List,
   ListItem,
-  Content,
-  Icon
-} from "native-base";
-const routes = ["Home", "Chat", "Profile"];
+  Content
+} from 'native-base'
+
+const routes = ['Home']
 
 export default class SideBar extends React.Component {
-  render() {
+  render () {
     return (
       <Container>
         <Content>
           <Image
             source={{
               uri:
-                "https://raw.githubusercontent.com/GeekyAnts/NativeBase-KitchenSink/master/assets/drawer-cover.png"
+                'https://raw.githubusercontent.com/GeekyAnts/NativeBase-KitchenSink/master/assets/drawer-cover.png'
             }}
             style={{
               height: 120,
-              width: "100%",
-              alignSelf: "stretch",
-              position: "absolute"
+              width: '100%',
+              alignSelf: 'stretch',
+              position: 'absolute'
             }}
           />
           <Image
@@ -33,13 +32,13 @@ export default class SideBar extends React.Component {
             style={{
               height: 80,
               width: 70,
-              position: "absolute",
-              alignSelf: "center",
+              position: 'absolute',
+              alignSelf: 'center',
               top: 20
             }}
             source={{
               uri:
-                "https://raw.githubusercontent.com/GeekyAnts/NativeBase-KitchenSink/master/assets/logo.png"
+                'https://raw.githubusercontent.com/GeekyAnts/NativeBase-KitchenSink/master/assets/logo.png'
             }}
           />
           <List
@@ -53,11 +52,11 @@ export default class SideBar extends React.Component {
                 >
                   <Text>{data}</Text>
                 </ListItem>
-              );
+              )
             }}
           />
         </Content>
       </Container>
-    );
+    )
   }
 }
