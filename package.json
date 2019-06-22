@@ -7,13 +7,13 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "test": "jest --watchAll"
+    "fix": "eslint --fix --ext .js --ignore-path .gitignore ."
   },
   "dependencies": {
     "@expo/samples": "~3.0.0",
     "@expo/vector-icons": "^10.0.1",
     "expo": "^33.0.0",
-    "expo-asset": "^5.0.0",
+    "expo-asset": "^5.0.1",
     "expo-constants": "^5.0.0",
     "expo-font": "^5.0.0",
     "expo-web-browser": "^5.0.0",
@@ -23,7 +23,8 @@
     "react-dom": "^16.8.6",
     "react-native": "https://github.com/expo/react-native/archive/sdk-33.0.0.tar.gz",
     "react-native-web": "^0.11.4",
-    "react-navigation": "^3.11.0"
+    "react-navigation": "^3.11.0",
+    "react-navigation-hooks": "^1.0.0-alpha.2"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",
