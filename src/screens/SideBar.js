@@ -1,13 +1,6 @@
+import { Container, Content, ListItem, Text, View } from 'native-base';
+import { FlatList, Image, StyleSheet } from 'react-native';
 import React, { useState, useEffect } from 'react'
-import { Image, FlatList } from 'react-native'
-import {
-  Text,
-  Container,
-  ListItem,
-  Content
-} from 'native-base'
-
-const routes = ['Home']
 
 export default (props) => {
   const [user, setUser] = useState(null)
@@ -21,20 +14,51 @@ export default (props) => {
     <Container>
       <Content>
         {user ?
-        <Image
-          square
-          style={{
-            height: 80,
-            width: 70,
-            position: 'absolute',
-            alignSelf: 'center',
-            top: 20
-          }}
-          source={{ uri: user.avatar_url }}
-         />
-         : <Text>''</Text>}
+         <View style={styles.profileContainer}>
+           <Image
+             style={styles.icon}
+             source={{ uri: user.avatar_url }}
+           />
+           <Text style={styles.name}> {user.name}</Text>
+         </View>
+         : <Text>''</Text>
+        }
+        <FlatList
+          data={['logout']}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({ item }) => {
+            return (
+              <ListItem>
+                <Text>{item}</Text>
+              </ListItem>
+            )
+          }} />
       </Content>
+
     </Container>
   )
-
 }
+
+const styles = StyleSheet.create({
+  profileContainer: {
+    backgroundColor: '#24292e',
+    paddingVertical: 60,
+
+  },
+  icon: {
+    width: 100,
+    height: 100,
+    alignSelf: 'center',
+    borderRadius: 50
+  },
+  name: {
+    color: '#ffffff',
+    fontWeight: 'bold',
+    alignSelf: 'center',
+    marginTop: 16
+  }
+})
+
+
+
+
