@@ -6,8 +6,7 @@ import SideBar from '../screens/SideBar'
 
 export default createDrawerNavigator(
   {
-    Home: { screen: HomeScreen },
-    SideBar: { screen: SideBar }
+    Home: { screen: HomeScreen }
   },
   {
     contentComponent: props => <SideBar {...props} />
