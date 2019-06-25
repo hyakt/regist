@@ -33,13 +33,9 @@ import platform from 'app/native-base-theme/variables/platform'
 const width = Dimensions.get('window').width
 
 export default (props) => {
-  const [token, setToken] = useState()
-  const [user, setUser] = useState()
-  const [gists, setGists] = useState()
-  const [articles, setArticles] = useState()
   const { navigation } = props
+  const { article } = navigation.state.params
 
-  // tokenを取得
   useEffect(() => {
 
   }, [])
@@ -56,11 +52,12 @@ export default (props) => {
             </Button>
           </Left>
           <Body>
-            <Title></Title>
+            <Title>{article.filename}</Title>
           </Body>
           <Right />
         </Header>
         <Content>
+          <Text>{article.content}</Text>
         </Content>
       </Container>
     </StyleProvider>
