@@ -1,16 +1,10 @@
 import {
-  AsyncStorage,
   Dimensions,
-  FlatList,
   StyleSheet,
-  Text,
-  View
 } from 'react-native'
 import {
   Body,
   Button,
-  Card,
-  CardItem,
   Container,
   Content,
   Header,
@@ -20,12 +14,10 @@ import {
   Title,
   StyleProvider
 } from 'native-base'
-import React, { useState, useEffect } from 'react'
-import invert from 'invert-color'
-import _ from 'lodash'
 
-import github from 'app/src/utility/github'
-import lang from 'app/src/constants/Languages'
+import React, { useEffect } from 'react'
+
+import SyntaxHighlighter from 'react-native-syntax-highlighter'
 
 import getTheme from 'app/native-base-theme/components'
 import platform from 'app/native-base-theme/variables/platform'
@@ -37,7 +29,7 @@ export default (props) => {
   const { article } = navigation.state.params
 
   useEffect(() => {
-
+    console.log(navigation.state.params)
   }, [])
 
   return (
@@ -57,7 +49,10 @@ export default (props) => {
           <Right />
         </Header>
         <Content>
-          <Text>{article.content}</Text>
+          <SyntaxHighlighter
+            language={article.language.toLowerCase()}>
+            {article.content}
+          </SyntaxHighlighter>
         </Content>
       </Container>
     </StyleProvider>
