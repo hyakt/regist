@@ -1,8 +1,4 @@
 import {
-  Dimensions,
-  StyleSheet,
-} from 'react-native'
-import {
   Body,
   Button,
   Container,
@@ -14,11 +10,18 @@ import {
   Title,
   StyleProvider
 } from 'native-base'
-
-import React, { useEffect } from 'react'
-
+import {
+  Dimensions,
+  StyleSheet,
+  Text,
+  TouchableHighlight,
+  View,
+  TextInput
+} from 'react-native'
+import React, { useState, useEffect } from 'react'
 import SyntaxHighlighter from 'react-native-syntax-highlighter'
 
+import { monokai } from 'react-syntax-highlighter/styles/hljs'
 import getTheme from 'app/native-base-theme/components'
 import platform from 'app/native-base-theme/variables/platform'
 
@@ -28,9 +31,18 @@ export default (props) => {
   const { navigation } = props
   const { article } = navigation.state.params
 
+  const [editable, setEditable] = useState(false)
+  const [content, setContent] = useState(article.content)
+  const [editing, setEditing] = useState(article.content)
+
   useEffect(() => {
-    console.log(navigation.state.params)
+    console.log(content)
   }, [])
+
+  const onPressSave = () => {
+    setEditable(!editable)
+    // TODO: github upload content
+  }
 
   return (
     <StyleProvider style={getTheme(platform)}>
@@ -46,14 +58,36 @@ export default (props) => {
           <Body>
             <Title>{article.filename}</Title>
           </Body>
-          <Right />
+          {editable
+            ? <Right>
+              <Button transparent
+                onPress={onPressSave}>
+                <Icon name='save' />
+              </Button>
+            </Right>
+            : <Right />
+          }
         </Header>
-        <Content>
-          <SyntaxHighlighter
-            language={article.language.toLowerCase()}>
-            {article.content}
-          </SyntaxHighlighter>
-        </Content>
+
+        <View style={styles.articleContainer}>
+          {editable
+            ? <TextInput
+              value={content}
+              multiline
+              backgroundColor='#272822'
+              autoCapitalize='none'
+              onChangeText={(text) => setContent(text)} />
+            : <TouchableHighlight
+              onPress={() => setEditable(!editable)}>
+              <SyntaxHighlighter
+                language={article.language.toLowerCase()}
+                style={monokai}
+                fontSize={14}>
+                {content}
+              </SyntaxHighlighter>
+            </TouchableHighlight>
+          }
+        </View>
       </Container>
     </StyleProvider>
   )
@@ -63,6 +97,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff'
+  },
+  articleContainer: {
+    width: '100%'
   },
   contentContainer: {
     paddingTop: 30
