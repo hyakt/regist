@@ -73,38 +73,33 @@ export default (props) => {
              </Right>
           }
         </Header>
-        <View style={styles.articleContainer}>
-          {editable
-           ? <TextInput
-               value={content}
-               multiline
-               style={{paddingLeft: 8, lineHeight: 19}}
-               color='#e6db74'
-               backgroundColor='#272822'
-               autoCapitalize='none'
-               fontFamily='Menlo-Regular'
-               fontSize={14}
-               onChangeText={(text) => setContent(text)} />
-           : <SyntaxHighlighter
-               language={article.language ? article.language.toLowerCase() : 'text'}
-               style={monokai}
-               fontSize={14}>
-               {content}
-             </SyntaxHighlighter>
-          }
-        </View>
-        <Footer />
+        <Content
+          contentContainerStyle={{ flex:1 }}>
+            {editable
+             ? <TextInput
+                 value={content}
+                 multiline
+                 style={{paddingLeft: 8, lineHeight: 19}}
+                 color='#e6db74'
+                 backgroundColor='#272822'
+                 autoCapitalize='none'
+                 fontFamily='Menlo-Regular'
+                 fontSize={14}
+                 onChangeText={(text) => setContent(text)} />
+             : <SyntaxHighlighter
+                 language={article.language ? article.language.toLowerCase() : 'text'}
+                 style={monokai}
+                 fontSize={14}>
+                 {content}
+               </SyntaxHighlighter>
+            }
+        </Content>
       </Container>
     </StyleProvider>
   )
 }
 
 const styles = StyleSheet.create({
-  articleContainer: {
-    width: '100%',
-    height: '100%',
-    marginBottom: 100
-  },
   contentContainer: {
     paddingTop: 30
   },
