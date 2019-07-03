@@ -2,19 +2,19 @@ import {
   Body,
   Button,
   Container,
-  Content,
   Header,
   Icon,
   Left,
   Right,
   Title,
-  StyleProvider
+  StyleProvider,
+  Text,
+  Content,
+  Footer
 } from 'native-base'
 import {
   Dimensions,
   StyleSheet,
-  Text,
-  TouchableHighlight,
   View,
   TextInput
 } from 'react-native'
@@ -61,45 +61,49 @@ export default (props) => {
           {editable
            ? <Right>
                <Button transparent onPress={onPressSave}>
-                 <Icon name='save' />
+                 <Icon type='FontAwesome' name='save' />
+                 <Text>Save</Text>
                </Button>
              </Right>
            : <Right>
                <Button transparent onPress={() => setEditable(!editable)}>
-                 <Icon type="FontAwesome" name="home" />
+                 <Icon type='FontAwesome' name='edit' />
+                 <Text>Edit</Text>
                </Button>
              </Right>
           }
         </Header>
-
         <View style={styles.articleContainer}>
           {editable
            ? <TextInput
                value={content}
                multiline
+               style={{paddingLeft: 8, lineHeight: 19}}
+               color='#e6db74'
                backgroundColor='#272822'
                autoCapitalize='none'
+               fontFamily='Menlo-Regular'
+               fontSize={14}
                onChangeText={(text) => setContent(text)} />
            : <SyntaxHighlighter
-               language={article.language.toLowerCase()}
+               language={article.language ? article.language.toLowerCase() : 'text'}
                style={monokai}
                fontSize={14}>
                {content}
              </SyntaxHighlighter>
           }
         </View>
+        <Footer />
       </Container>
     </StyleProvider>
   )
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff'
-  },
   articleContainer: {
-    width: '100%'
+    width: '100%',
+    height: '100%',
+    marginBottom: 100
   },
   contentContainer: {
     paddingTop: 30
