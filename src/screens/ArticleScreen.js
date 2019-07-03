@@ -59,33 +59,33 @@ export default (props) => {
             <Title>{article.filename}</Title>
           </Body>
           {editable
-            ? <Right>
-              <Button transparent
-                onPress={onPressSave}>
-                <Icon name='save' />
-              </Button>
-            </Right>
-            : <Right />
+           ? <Right>
+               <Button transparent onPress={onPressSave}>
+                 <Icon name='save' />
+               </Button>
+             </Right>
+           : <Right>
+               <Button transparent onPress={() => setEditable(!editable)}>
+                 <Icon type="FontAwesome" name="home" />
+               </Button>
+             </Right>
           }
         </Header>
 
         <View style={styles.articleContainer}>
           {editable
-            ? <TextInput
-              value={content}
-              multiline
-              backgroundColor='#272822'
-              autoCapitalize='none'
-              onChangeText={(text) => setContent(text)} />
-            : <TouchableHighlight
-              onPress={() => setEditable(!editable)}>
-              <SyntaxHighlighter
-                language={article.language.toLowerCase()}
-                style={monokai}
-                fontSize={14}>
-                {content}
-              </SyntaxHighlighter>
-            </TouchableHighlight>
+           ? <TextInput
+               value={content}
+               multiline
+               backgroundColor='#272822'
+               autoCapitalize='none'
+               onChangeText={(text) => setContent(text)} />
+           : <SyntaxHighlighter
+               language={article.language.toLowerCase()}
+               style={monokai}
+               fontSize={14}>
+               {content}
+             </SyntaxHighlighter>
           }
         </View>
       </Container>
