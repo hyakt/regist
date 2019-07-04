@@ -1,9 +1,10 @@
 import React from 'react'
 import { createDrawerNavigator, createStackNavigator } from 'react-navigation'
 
-import HomeScreen from '../screens/HomeScreen'
-import ArticleScreen from '../screens/ArticleScreen'
-import SideBar from '../screens/SideBar'
+import HomeScreen from 'app/src/screens/HomeScreen'
+import EditScreen from 'app/src/screens/EditScreen'
+import AddScreen from 'app/src/screens/AddScreen'
+import SideBar from 'app/src/screens/SideBar'
 
 const drawerNavigator = createDrawerNavigator(
   {
@@ -17,7 +18,8 @@ const drawerNavigator = createDrawerNavigator(
 export default createStackNavigator(
   {
     Home: { screen: drawerNavigator },
-    Article: { screen: ArticleScreen }
+    Edit: { screen: EditScreen },
+    Add: { screen: AddScreen }
   },
   {
     headerMode: 'none'
