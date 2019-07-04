@@ -24,6 +24,7 @@ import SyntaxHighlighter from 'react-native-syntax-highlighter'
 import { monokai } from 'react-syntax-highlighter/styles/hljs'
 import getTheme from 'app/native-base-theme/components'
 import platform from 'app/native-base-theme/variables/platform'
+import github from 'app/src/utility/github'
 
 const width = Dimensions.get('window').width
 
@@ -36,12 +37,24 @@ export default (props) => {
   const [editing, setEditing] = useState(article.content)
 
   useEffect(() => {
-    console.log(content)
+    console.log(article)
   }, [])
 
-  const onPressSave = () => {
-    setEditable(!editable)
-    // TODO: github upload content
+  const onPressSave = async () => {
+    await console.log(await github.updateGist(article.id, makePayload(), article.token))
+    await setEditable(!editable)
+  }
+
+  const makePayload = () => {
+    return JSON.stringify({
+      'description': article.description,
+      'files': {
+        [article.filename]: {
+          'content': content,
+          'filename': article.filename
+        }
+      }
+    })
   }
 
   return (
@@ -75,8 +88,8 @@ export default (props) => {
         </Header>
         <Content
           contentContainerStyle={{ flex:1 }}>
-            {editable
-             ? <TextInput
+          {editable
+           ? <TextInput
                  value={content}
                  multiline
                  style={{paddingLeft: 8, lineHeight: 19}}
@@ -86,13 +99,13 @@ export default (props) => {
                  fontFamily='Menlo-Regular'
                  fontSize={14}
                  onChangeText={(text) => setContent(text)} />
-             : <SyntaxHighlighter
+           : <SyntaxHighlighter
                  language={article.language ? article.language.toLowerCase() : 'text'}
                  style={monokai}
                  fontSize={14}>
-                 {content}
-               </SyntaxHighlighter>
-            }
+                     {content}
+                   </SyntaxHighlighter>
+          }
         </Content>
       </Container>
     </StyleProvider>
