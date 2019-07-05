@@ -42,6 +42,12 @@ export default (props) => {
 
   const onPressSave = async () => {
     await console.log(await github.updateGist(article.id, makePayload(), article.token))
+    await setEditing(content)
+    await setEditable(!editable)
+  }
+
+  const onPressCancel = async () => {
+    await setContent(editing)
     await setEditable(!editable)
   }
 
@@ -61,26 +67,35 @@ export default (props) => {
     <StyleProvider style={getTheme(platform)}>
       <Container>
         <Header>
-          <Left>
-            <Button
-              transparent
-              onPress={() => { navigation.goBack() }} >
-              <Icon name='arrow-back' />
-            </Button>
-          </Left>
+          {editable
+           ? <Left>
+               <Button
+                 transparent
+                 onPress={() => { onPressCancel() }} >
+                 <Text>Cancel</Text>
+               </Button>
+             </Left>
+           : <Left>
+               <Button
+                 transparent
+                 onPress={() => { navigation.goBack() }} >
+                 <Icon name='arrow-back' />
+               </Button>
+             </Left>
+          }
           <Body>
             <Title>{article.filename}</Title>
           </Body>
           {editable
            ? <Right>
                <Button transparent onPress={onPressSave}>
-                 <Icon type='FontAwesome' name='save' />
+                 {/* <Icon type='FontAwesome' name='save' /> */}
                  <Text>Save</Text>
                </Button>
              </Right>
            : <Right>
                <Button transparent onPress={() => setEditable(!editable)}>
-                 <Icon type='FontAwesome' name='edit' />
+                 {/* <Icon type='FontAwesome' name='edit' /> */}
                  <Text>Edit</Text>
                </Button>
              </Right>
@@ -90,21 +105,21 @@ export default (props) => {
           contentContainerStyle={{ flex:1 }}>
           {editable
            ? <TextInput
-                 value={content}
-                 multiline
-                 style={{paddingLeft: 8, lineHeight: 19}}
-                 color='#e6db74'
-                 backgroundColor='#272822'
-                 autoCapitalize='none'
-                 fontFamily='Menlo-Regular'
-                 fontSize={14}
-                 onChangeText={(text) => setContent(text)} />
+               value={content}
+               multiline
+               style={{paddingLeft: 8, lineHeight: 19}}
+               color='#e6db74'
+               backgroundColor='#272822'
+               autoCapitalize='none'
+               fontFamily='Menlo-Regular'
+               fontSize={14}
+               onChangeText={(text) => setContent(text)} />
            : <SyntaxHighlighter
-                 language={article.language ? article.language.toLowerCase() : 'text'}
-                 style={monokai}
-                 fontSize={14}>
-                     {content}
-                   </SyntaxHighlighter>
+               language={article.language ? article.language.toLowerCase() : 'text'}
+               style={monokai}
+               fontSize={14}>
+               {content}
+             </SyntaxHighlighter>
           }
         </Content>
       </Container>
