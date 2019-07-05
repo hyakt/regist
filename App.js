@@ -2,6 +2,7 @@ import { AppLoading } from 'expo'
 import { Asset } from 'expo-asset'
 import * as Font from 'expo-font'
 import React, { useState } from 'react'
+import { Root } from "native-base"
 import { Platform, StatusBar, StyleSheet, View } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 
@@ -12,18 +13,17 @@ export default function App (props) {
 
   if (!isLoadingComplete && !props.skipLoadingScreen) {
     return (
-      <AppLoading
-        startAsync={loadResourcesAsync}
-        onError={handleLoadingError}
-        onFinish={() => handleFinishLoading(setLoadingComplete)}
-      />
+        <AppLoading
+      startAsync={loadResourcesAsync}
+      onError={handleLoadingError}
+      onFinish={() => handleFinishLoading(setLoadingComplete)}
+        />
     )
   } else {
     return (
-      <View style={styles.container}>
-        {Platform.OS === 'ios' && <StatusBar barStyle='default' />}
+        <Root>
         <AppNavigator />
-      </View>
+        </Root>
     )
   }
 }

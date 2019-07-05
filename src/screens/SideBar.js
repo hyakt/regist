@@ -42,7 +42,6 @@ const styles = StyleSheet.create({
   profileContainer: {
     backgroundColor: '#24292e',
     paddingVertical: 60,
-
   },
   icon: {
     width: 100,
