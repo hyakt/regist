@@ -47,7 +47,7 @@ export default (props) => {
             <Button
               transparent
               onPress={() => { navigation.goBack() }} >
-              <Icon name='arrow-back' />
+              <Icon name='close' />
             </Button>
           </Left>
           <Body>
