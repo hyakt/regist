@@ -1,6 +1,9 @@
-import { Container, Content, ListItem, Text, View } from 'native-base';
-import { FlatList, Image, StyleSheet } from 'react-native';
+import { Container, Content, ListItem, Text, View, StyleProvider } from 'native-base'
+import { FlatList, Image, StyleSheet } from 'react-native'
 import React, { useState, useEffect } from 'react'
+
+import getTheme from 'app/native-base-theme/components'
+import platform from 'app/native-base-theme/variables/platform'
 
 export default (props) => {
   const [user, setUser] = useState(null)
@@ -8,40 +11,45 @@ export default (props) => {
 
   useEffect(() => {
     setUser(navigation._childrenNavigation.Home.getParam('user'))
+    console.log(navigation._childrenNavigation.Home.getParam('user'))
   }, [navigation._childrenNavigation.Home.getParam('user')])
 
   return (
-    <Container>
-      <Content>
-        {user ?
-         <View style={styles.profileContainer}>
-           <Image
-             style={styles.icon}
-             source={{ uri: user.avatar_url }}
-           />
-           <Text style={styles.name}> {user.name}</Text>
-         </View>
-         : <Text>''</Text>
-        }
-        <FlatList
-          data={['logout']}
-          keyExtractor={(item, index) => index.toString()}
-          renderItem={({ item }) => {
-            return (
-              <ListItem>
-                <Text>{item}</Text>
-              </ListItem>
-            )
-          }} />
-      </Content>
-    </Container>
+    <StyleProvider style={getTheme(platform)}>
+      <Container>
+        <Content>
+          {user ?
+           <View style={styles.profileContainer}>
+             <Image
+               style={styles.icon}
+               source={{ uri: user.avatar_url }}
+             />
+             <View style={styles.nameContainer}>
+               <Text style={styles.name}>{user.name}</Text>
+               <Text style={styles.loginName}>{user.login}</Text>
+             </View>
+           </View>
+           : <Text>''</Text>
+          }
+          <FlatList
+            data={['Logout', 'Acknowledgement']}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({ item }) => {
+              return (
+                <ListItem>
+                  <Text>{item}</Text>
+                </ListItem>
+              )
+            }} />
+        </Content>
+      </Container>
+    </StyleProvider>
   )
 }
 
 const styles = StyleSheet.create({
   profileContainer: {
-    backgroundColor: '#24292e',
-    paddingVertical: 60,
+    paddingVertical: 60
   },
   icon: {
     width: 100,
@@ -49,14 +57,15 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     borderRadius: 50
   },
+  nameContainer: {
+    alignItems: 'center',
+    marginTop: 16
+  },
   name: {
     color: '#ffffff',
-    fontWeight: 'bold',
-    alignSelf: 'center',
-    marginTop: 16
+    fontWeight: 'bold'
+  },
+  loginName: {
+    color: '#ffffff'
   }
 })
-
-
-
-
