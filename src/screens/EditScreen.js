@@ -124,7 +124,7 @@ export default (props) => {
           {editable
             ? <Right>
               <Button transparent onPress={onPressSave}>
-                <Icon type='FontAwesome' name='save' />
+                <Icon type='MaterialCommunityIcons' name='content-save-edit' />
               </Button>
             </Right>
             : <Right>
@@ -132,7 +132,7 @@ export default (props) => {
                 <Icon type='MaterialCommunityIcons' name='delete-forever' />
               </Button>
               <Button transparent onPress={() => setEditable(!editable)}>
-                <Icon type='FontAwesome' name='edit' />
+                <Icon type='MaterialCommunityIcons' name='square-edit-outline' />
               </Button>
             </Right>
           }
@@ -176,20 +176,19 @@ export default (props) => {
           <View style={styles.modalContainer}>
             <Text style={styles.message}>Are you sure?</Text>
             <View style={{ flex: 1, flexDirection: 'row', marginTop: 20 }}>
-              <Button transparent style={{ paddingHorizontal: 20 }} onPress={() => {
+              <Button transparent style={{ paddingHorizontal: 20 }} onPress={() => setIsConfirmDelete(false)}>
+                <Text>No</Text>
+              </Button>
+              <Button danger transparent style={{ paddingHorizontal: 20 }} onPress={() => {
                 setIsConfirmDelete(false)
                 onPressDelete()
               }}>
-                <Text>Delete it</Text>
-              </Button>
-              <Button danger transparent style={{ paddingHorizontal: 20 }} onPress={() => setIsConfirmDelete(false)}>
-                <Text>No</Text>
+                <Text style={{fontWeight: 'bold'}}>Delete it</Text>
               </Button>
             </View>
           </View>
         </Modal>
       </Container>
-
     </StyleProvider>
   )
 }
