@@ -44,6 +44,7 @@ export default (props) => {
 
   const onPressAdd = async () => {
     const status = await github.addGist(makePayload(), token)
+    navigation.goBack()
     if (status === 201) {
       await Toast.show({
         text: 'Add Successfull',
