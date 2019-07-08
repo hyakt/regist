@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react'
 import {
   Body,
   Button,
@@ -11,9 +12,10 @@ import {
   Text,
   Title,
   Toast
-} from 'native-base';
+} from 'native-base'
 import { Dimensions, StyleSheet, TextInput, View } from 'react-native'
-import React, { useState, useEffect } from 'react'
+
+import Modal from 'react-native-modal'
 import SyntaxHighlighter from 'react-native-syntax-highlighter'
 
 import { monokai } from 'react-syntax-highlighter/styles/hljs'
@@ -32,6 +34,7 @@ export default (props) => {
   const [editing, setEditing] = useState(article.content)
   const [isUpdating, setIsUpdating] = useState(false)
   const [isDeleting, setIsDeleting] = useState(false)
+  const [isConfirmDelete, setIsConfirmDelete] = useState(false)
 
   useEffect(() => {
     console.log(article)
@@ -125,11 +128,11 @@ export default (props) => {
               </Button>
             </Right>
             : <Right>
+              <Button transparent onPress={() => setIsConfirmDelete(true)}>
+                <Icon type='MaterialCommunityIcons' name='delete-forever' />
+              </Button>
               <Button transparent onPress={() => setEditable(!editable)}>
                 <Icon type='FontAwesome' name='edit' />
-              </Button>
-              <Button transparent onPress={onPressDelete}>
-                <Icon type='MaterialCommunityIcons' name='delete-forever' />
               </Button>
             </Right>
           }
@@ -157,7 +160,7 @@ export default (props) => {
         </Content>
         { isUpdating
           ? <View style={styles.progressContainer}>
-              <Text style={styles.progressText}>Updating...</Text>
+            <Text style={styles.progressText}>Updating...</Text>
           </View>
           : isDeleting
             ? <View style={styles.progressContainer}>
@@ -165,7 +168,28 @@ export default (props) => {
             </View>
             : <View />
         }
+        <Modal
+          isVisible={isConfirmDelete}
+          backdropOpacity={0.8}
+          animationIn='zoomInDown'
+          animationOut='zoomOutUp'>
+          <View style={styles.modalContainer}>
+            <Text style={styles.message}>Are you sure?</Text>
+            <View style={{ flex: 1, flexDirection: 'row', marginTop: 20 }}>
+              <Button transparent style={{ paddingHorizontal: 20 }} onPress={() => {
+                setIsConfirmDelete(false)
+                onPressDelete()
+              }}>
+                <Text>Delete it</Text>
+              </Button>
+              <Button danger transparent style={{ paddingHorizontal: 20 }} onPress={() => setIsConfirmDelete(false)}>
+                <Text>No</Text>
+              </Button>
+            </View>
+          </View>
+        </Modal>
       </Container>
+
     </StyleProvider>
   )
 }
@@ -173,8 +197,6 @@ export default (props) => {
 const styles = StyleSheet.create({
   contentContainer: {
     paddingTop: 30
-  },
-  cardHeader: {
   },
   headerText: {
     fontWeight: 'bold'
@@ -191,5 +213,19 @@ const styles = StyleSheet.create({
   progressText: {
     color: '#a6e22e',
     fontWeight: 'bold'
+  },
+  modalContainer: {
+    height: 200,
+    width: 300,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'white'
+  },
+  message: {
+    fontSize: 18,
+    color: '#000',
+    marginTop: 70,
+    alignSelf: 'center',
+    justifyContent: 'center'
   }
 })
