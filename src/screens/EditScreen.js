@@ -183,7 +183,7 @@ export default (props) => {
                 setIsConfirmDelete(false)
                 onPressDelete()
               }}>
-                <Text style={{fontWeight: 'bold'}}>Delete it</Text>
+                <Text style={{ fontWeight: 'bold' }}>Delete it</Text>
               </Button>
             </View>
           </View>
