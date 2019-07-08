@@ -29,7 +29,7 @@ export default (props) => {
                <Text style={styles.loginName}>{user.login}</Text>
              </View>
            </View>
-           : <Text>''</Text>
+           : <View></View>
           }
           <FlatList
             data={['Logout', 'Acknowledgement']}
