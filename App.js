@@ -2,8 +2,8 @@ import { AppLoading } from 'expo'
 import { Asset } from 'expo-asset'
 import * as Font from 'expo-font'
 import React, { useState } from 'react'
-import { Root } from "native-base"
-import { Platform, StatusBar, StyleSheet, View } from 'react-native'
+import { Root } from 'native-base'
+import { StyleSheet } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 
 import AppNavigator from 'app/src/navigation/AppNavigator'
@@ -13,17 +13,17 @@ export default function App (props) {
 
   if (!isLoadingComplete && !props.skipLoadingScreen) {
     return (
-        <AppLoading
-      startAsync={loadResourcesAsync}
-      onError={handleLoadingError}
-      onFinish={() => handleFinishLoading(setLoadingComplete)}
-        />
+      <AppLoading
+        startAsync={loadResourcesAsync}
+        onError={handleLoadingError}
+        onFinish={() => handleFinishLoading(setLoadingComplete)}
+      />
     )
   } else {
     return (
-        <Root>
+      <Root>
         <AppNavigator />
-        </Root>
+      </Root>
     )
   }
 }
@@ -42,8 +42,6 @@ async function loadResourcesAsync () {
 }
 
 function handleLoadingError (error: Error) {
-  // In this case, you might want to report the error to your error reporting
-  // service, for example Sentry
   console.warn(error)
 }
 

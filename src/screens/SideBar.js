@@ -1,6 +1,6 @@
-import { Container, Content, ListItem, Text, View, StyleProvider } from 'native-base'
-import { FlatList, Image, StyleSheet } from 'react-native'
 import React, { useState, useEffect } from 'react'
+import { Container, Content, ListItem, Text, View, StyleProvider } from 'native-base'
+import { FlatList, Image, StyleSheet, AsyncStorae } from 'react-native'
 
 import getTheme from 'app/native-base-theme/components'
 import platform from 'app/native-base-theme/variables/platform'
@@ -12,6 +12,10 @@ export default (props) => {
   useEffect(() => {
     setUser(navigation._childrenNavigation.Home.getParam('user'))
   }, [navigation._childrenNavigation.Home.getParam('user')])
+
+  const itemList = [
+    { 'name': 'Logout', 'f': () => AsyncStorae.clear() }
+  ]
 
   return (
     <StyleProvider style={getTheme(platform)}>
@@ -31,12 +35,12 @@ export default (props) => {
            : <View></View>
           }
           <FlatList
-            data={['Logout', 'Acknowledgement']}
+            data={itemList}
             keyExtractor={(item, index) => index.toString()}
             renderItem={({ item }) => {
               return (
-                <ListItem>
-                  <Text>{item}</Text>
+                <ListItem onPress={item.f}>
+                  <Text>{item.name}</Text>
                 </ListItem>
               )
             }} />
