@@ -11,7 +11,6 @@ export default (props) => {
 
   useEffect(() => {
     setUser(navigation._childrenNavigation.Home.getParam('user'))
-    console.log(navigation._childrenNavigation.Home.getParam('user'))
   }, [navigation._childrenNavigation.Home.getParam('user')])
 
   return (

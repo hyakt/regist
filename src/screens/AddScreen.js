@@ -43,12 +43,20 @@ export default (props) => {
   }, [])
 
   const onPressAdd = async () => {
-    await console.log(await github.addGist(makePayload(), token))
-    await Toast.show({
-      text: 'Add Successfull!',
-      buttonText: 'OK',
-      type: 'success'
-    })
+    const status = await github.addGist(makePayload(), token)
+    if (status === 201) {
+      await Toast.show({
+        text: 'Add Successfull',
+        buttonText: 'OK',
+        type: 'success'
+      })
+    } else {
+      await Toast.show({
+        text: 'An Error Occurred',
+        buttonText: 'OK',
+        type: 'warning'
+      })
+    }
   }
 
   const makePayload = () => {

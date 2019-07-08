@@ -2,16 +2,16 @@ import {
   Body,
   Button,
   Container,
+  Content,
   Header,
   Icon,
   Left,
   Right,
-  Title,
   StyleProvider,
   Text,
-  Content,
+  Title,
   Toast
-} from 'native-base'
+} from 'native-base';
 import { Dimensions, StyleSheet, TextInput, View } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import SyntaxHighlighter from 'react-native-syntax-highlighter'
@@ -31,6 +31,7 @@ export default (props) => {
   const [content, setContent] = useState(article.content)
   const [editing, setEditing] = useState(article.content)
   const [isUpdating, setIsUpdating] = useState(false)
+  const [isDeleting, setIsDeleting] = useState(false)
 
   useEffect(() => {
     console.log(article)
@@ -38,15 +39,43 @@ export default (props) => {
 
   const onPressSave = async () => {
     await setIsUpdating(true)
-    await console.log(await github.updateGist(article.id, makePayload(), article.token))
-    await setEditing(content)
+    const status = await github.updateGist(article.id, makePayload(), article.token)
     await setEditable(!editable)
     await setIsUpdating(false)
-    await Toast.show({
-      text: 'Edit Successfull!',
-      buttonText: 'OK',
-      type: 'success'
-    })
+    if (status === 200) {
+      await setEditing(content)
+      await Toast.show({
+        text: 'Update Successfull',
+        buttonText: 'OK',
+        type: 'success'
+      })
+    } else {
+      await Toast.show({
+        text: 'An Error Occurred',
+        buttonText: 'OK',
+        type: 'warning'
+      })
+    }
+  }
+
+  const onPressDelete = async () => {
+    await setIsDeleting(true)
+    const status = await github.deleteGist(article.id, article.token)
+    await setIsDeleting(false)
+    if (status === 204) {
+      await Toast.show({
+        text: 'Delete Successfull',
+        buttonText: 'OK',
+        type: 'success'
+      })
+      navigation.goBack()
+    } else {
+      await Toast.show({
+        text: 'An Error Occurred',
+        buttonText: 'OK',
+        type: 'warning'
+      })
+    }
   }
 
   const onPressCancel = async () => {
@@ -75,7 +104,7 @@ export default (props) => {
               <Button
                 transparent
                 onPress={() => { onPressCancel() }} >
-                <Text>Cancel</Text>
+                <Icon name='close' />
               </Button>
             </Left>
             : <Left>
@@ -98,6 +127,9 @@ export default (props) => {
             : <Right>
               <Button transparent onPress={() => setEditable(!editable)}>
                 <Icon type='FontAwesome' name='edit' />
+              </Button>
+              <Button transparent onPress={onPressDelete}>
+                <Icon type='MaterialCommunityIcons' name='delete-forever' />
               </Button>
             </Right>
           }
@@ -125,9 +157,13 @@ export default (props) => {
         </Content>
         { isUpdating
           ? <View style={styles.progressContainer}>
-            <Text style={styles.progressText}>Updating...</Text>
+              <Text style={styles.progressText}>Updating...</Text>
           </View>
-          : <View />
+          : isDeleting
+            ? <View style={styles.progressContainer}>
+              <Text style={styles.progressText}>Deleting...</Text>
+            </View>
+            : <View />
         }
       </Container>
     </StyleProvider>
