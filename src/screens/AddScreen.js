@@ -23,7 +23,8 @@ import {
   TouchableWithoutFeedback
 } from 'react-native'
 import React, { useState, useEffect } from 'react'
-import SyntaxHighlighter from 'react-native-syntax-highlighter'
+
+import Spinner from 'react-native-loading-spinner-overlay'
 
 import getTheme from 'app/native-base-theme/components'
 import github from 'app/src/utility/github'
@@ -38,19 +39,23 @@ export default (props) => {
   const [isPublic, setIsPublic] = useState(true)
   const [description, setDescription] = useState('')
   const [content, setContent] = useState('')
+  const [isUpdating, setIsUpdating] = useState(false)
 
   useEffect(() => {
   }, [])
 
   const onPressAdd = async () => {
+    Keyboard.dismiss()
+    await setIsUpdating(true)
     const status = await github.addGist(makePayload(), token)
-    navigation.goBack()
+    await setIsUpdating(false)
     if (status === 201) {
       await Toast.show({
         text: 'Add Successfull',
         buttonText: 'OK',
         type: 'success'
       })
+      navigation.goBack()
     } else {
       await Toast.show({
         text: 'An Error Occurred',
@@ -109,7 +114,7 @@ export default (props) => {
                   onChangeText={(text) => setFilename(text)} />
               </Item>
               <Item stackedLabel>
-                <Label>Gist description</Label>
+                <Label>Gist description (optional)</Label>
                 <Input
                   value={description}
                   onChangeText={(text) => setDescription(text)} />
@@ -123,6 +128,12 @@ export default (props) => {
               </Item>
             </Form>
           </Content>
+          <Spinner
+            visible={isUpdating}
+            color={'#a6e22e'}
+            textContent={'Upload Gist...'}
+            textStyle={styles.spinnerTextStyle}
+          />
         </Container>
       </TouchableWithoutFeedback>
     </StyleProvider>
@@ -133,12 +144,10 @@ const styles = StyleSheet.create({
   contentContainer: {
     paddingTop: 30
   },
-  cardHeader: {
-  },
   headerText: {
     fontWeight: 'bold'
   },
-  card: {
-    width: width / 2
-  }
+  spinnerTextStyle: {
+    color: '#a6e22e'
+  },
 })
