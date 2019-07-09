@@ -1,5 +1,13 @@
-import { AsyncStorage, Image, StyleSheet, View, Dimensions } from 'react-native'
-import { Body, Button, Container, Content, Icon, Text } from 'native-base'
+import {
+  AsyncStorage,
+  Dimensions,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View
+} from 'react-native';
+import { Icon } from 'native-base'
 import React, { useEffect } from 'react'
 
 import github from 'app/src/utility/github'
@@ -17,24 +25,20 @@ export default (props) => {
   }
 
   return (
-    <Container style={styles.container}>
-      <Content contentContainerStyle={{ flex: 1 }}>
-        <Body>
-          <Image
-            style={styles.icon}
-            source={require('app/src/assets/images/logo.png')}
-          />
-          <View style={styles.buttonContainer}>
-            <Button
-              style={styles.button}
-              onPress={() => _fetchToken()} >
-              <Icon name='logo-github' />
-              <Text>Sign In</Text>
-            </Button>
-          </View>
-        </Body>
-      </Content>
-    </Container>
+    <View style={styles.container}>
+      <Image
+        style={styles.icon}
+        source={require('app/src/assets/images/logo.png')}
+      />
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => _fetchToken()} >
+          <Icon style={{...styles.buttonText, fontSize: 44}} name='logo-github' />
+          <Text style={styles.buttonText}>Sign In</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
   )
 }
 
@@ -46,19 +50,23 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   icon: {
-    flex: 1,
+    flex: 2,
     width: width,
     resizeMode: 'cover'
   },
   buttonContainer: {
-    flex: 1,
-    alignContent: 'center',
-    justifyContent: 'center'
+    flex: 1
   },
   button: {
-    height: 60,
-    width: 300,
-    backgroundColor: '#272822',
-    borderRadius: 20
+    alignContent: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: width,
+    height: '100%',
+    backgroundColor: '#F75F95'
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 24
   }
 })
