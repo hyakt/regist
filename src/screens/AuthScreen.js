@@ -13,11 +13,12 @@ export default (props) => {
   const _fetchToken = async () => {
     const fetchToken = await github.getToken()
     await AsyncStorage.setItem('token', fetchToken)
+    await props.navigation.navigate('AuthLoading')
   }
 
   return (
     <Container style={styles.container}>
-    <Content contentContainerStyle={{ flex: 1 }}>
+      <Content contentContainerStyle={{ flex: 1 }}>
         <Body>
           <Image
             style={styles.icon}
@@ -26,7 +27,7 @@ export default (props) => {
           <View style={styles.buttonContainer}>
             <Button
               style={styles.button}
-              onPress={() => { props.navigation.navigate('AuthLoading') }} >
+              onPress={() => _fetchToken()} >
               <Icon name='logo-github' />
               <Text>Sign In</Text>
             </Button>
