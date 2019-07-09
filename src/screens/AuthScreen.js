@@ -26,10 +26,9 @@ export default (props) => {
 
   return (
     <View style={styles.container}>
-      <Image
-        style={styles.icon}
-        source={require('app/src/assets/images/logo.png')}
-      />
+      <View style={styles.logoContainer}>
+        <Text style={styles.logoText}>regist</Text>
+      </View>
       <View style={styles.buttonContainer}>
         <TouchableOpacity
           style={styles.button}
@@ -49,10 +48,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   },
-  icon: {
-    flex: 2,
-    width: width,
-    resizeMode: 'cover'
+  logoContainer: {
+    flex: 3,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  logoText: {
+    color: '#F75F95',
+    fontSize: 60,
+    fontFamily: 'AnonymousPro_Bold'
   },
   buttonContainer: {
     flex: 1

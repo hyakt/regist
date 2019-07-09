@@ -36,6 +36,7 @@ async function loadResourcesAsync () {
     Font.loadAsync({
       'Roboto': require('native-base/Fonts/Roboto.ttf'),
       'Roboto_medium': require('native-base/Fonts/Roboto_medium.ttf'),
+      'AnonymousPro_Bold': require('./src/assets/fonts/AnonymousPro-Bold.ttf'),
       ...Ionicons.font
     })
   ])
