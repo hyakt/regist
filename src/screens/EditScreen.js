@@ -27,7 +27,7 @@ const width = Dimensions.get('window').width
 
 export default (props) => {
   const { navigation } = props
-  const { article } = navigation.state.params
+  const { token, article } = navigation.state.params
 
   const [editable, setEditable] = useState(false)
   const [content, setContent] = useState(article.content)
@@ -42,7 +42,7 @@ export default (props) => {
 
   const onPressSave = async () => {
     await setIsUpdating(true)
-    const status = await github.updateGist(article.id, makePayload(), article.token)
+    const status = await github.updateGist(article.id, makePayload(), token)
     await setEditable(!editable)
     await setIsUpdating(false)
     if (status === 200) {

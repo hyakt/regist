@@ -1,23 +1,19 @@
+import React from 'react'
 import {
   AsyncStorage,
   Dimensions,
-  Image,
   StyleSheet,
   Text,
   TouchableOpacity,
   View
-} from 'react-native';
+} from 'react-native'
 import { Icon } from 'native-base'
-import React, { useEffect } from 'react'
 
 import github from 'app/src/utility/github'
 
 const { width } = Dimensions.get('window')
 
 export default (props) => {
-  useEffect(() => {
-  }, [])
-
   const _fetchToken = async () => {
     const fetchToken = await github.getToken()
     await AsyncStorage.setItem('token', fetchToken)
@@ -33,7 +29,7 @@ export default (props) => {
         <TouchableOpacity
           style={styles.button}
           onPress={() => _fetchToken()} >
-          <Icon style={{...styles.buttonText, fontSize: 44}} name='logo-github' />
+          <Icon style={{ ...styles.buttonText, fontSize: 44 }} name='logo-github' />
           <Text style={styles.buttonText}>Sign In</Text>
         </TouchableOpacity>
       </View>

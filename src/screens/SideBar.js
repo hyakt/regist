@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Container, Content, ListItem, Text, View, StyleProvider } from 'native-base'
 import { FlatList, Image, StyleSheet, AsyncStorage } from 'react-native'
 
+import github from 'app/src/utility/github'
 import getTheme from 'app/native-base-theme/components'
 import platform from 'app/native-base-theme/variables/platform'
 
@@ -14,7 +15,9 @@ export default (props) => {
   }, [navigation._childrenNavigation.Home.getParam('user')])
 
   const itemList = [
-    { 'name': 'Sign Out', 'f': async () => {
+    { 'name': 'Sign Out',
+      'f': async () => {
+        // github.revokeAuthentication()
       await AsyncStorage.clear()
       await navigation.navigate('AuthLoading')
     } }

@@ -1,14 +1,12 @@
+import React, { useState } from 'react'
 import { AppLoading } from 'expo'
 import { Asset } from 'expo-asset'
 import * as Font from 'expo-font'
-import React, { useState } from 'react'
 import { Root } from 'native-base'
-import { StyleSheet } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
-
 import AppNavigator from 'app/src/navigation/AppNavigator'
 
-export default function App (props) {
+export default (props) => {
   const [isLoadingComplete, setLoadingComplete] = useState(false)
 
   if (!isLoadingComplete && !props.skipLoadingScreen) {
@@ -28,7 +26,7 @@ export default function App (props) {
   }
 }
 
-async function loadResourcesAsync () {
+const loadResourcesAsync = async () => {
   await Promise.all([
     Asset.loadAsync([
     ]),
@@ -42,17 +40,10 @@ async function loadResourcesAsync () {
   ])
 }
 
-function handleLoadingError (error: Error) {
+const handleLoadingError = (error) => {
   console.warn(error)
 }
 
-function handleFinishLoading (setLoadingComplete) {
+const handleFinishLoading = (setLoadingComplete) => {
   setLoadingComplete(true)
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff'
-  }
-})
