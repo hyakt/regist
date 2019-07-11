@@ -33,6 +33,7 @@
     "react-navigation-animated-switch": "^0.2.1",
     "react-navigation-hooks": "^1.0.0-alpha.2",
     "react-navigation-transitions": "^1.0.10",
+    "sentry-expo": "^1.13.0",
     "yaml": "^1.6.0"
   },
   "devDependencies": {

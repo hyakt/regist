@@ -26,6 +26,18 @@
       "buildNumber": "2",
       "bundleIdentifier": "com.hyakt.regist",
       "supportsTablet": true
+    },
+    "hooks": {
+      "postPublish": [
+        {
+          "file": "sentry-expo/upload-sourcemaps",
+          "config": {
+            "organization": "hayato-kajiyama",
+            "project": "regist",
+            "authToken": "c873efdea3a711e9a6134201c0a8d030"
+          }
+        }
+      ]
     }
   }
 }
