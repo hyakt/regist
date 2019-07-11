@@ -2,12 +2,11 @@
   "expo": {
     "name": "regist",
     "slug": "regist",
+    "scheme": "regist",
     "privacy": "public",
     "sdkVersion": "33.0.0",
     "platforms": [
-      "ios",
-      "android",
-      "web"
+      "ios"
     ],
     "version": "0.0.1",
     "orientation": "portrait",
