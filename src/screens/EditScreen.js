@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import {
   Body,
   Button,
@@ -35,10 +35,6 @@ export default (props) => {
   const [isUpdating, setIsUpdating] = useState(false)
   const [isDeleting, setIsDeleting] = useState(false)
   const [isConfirmDelete, setIsConfirmDelete] = useState(false)
-
-  useEffect(() => {
-    console.log(article)
-  }, [])
 
   const onPressSave = async () => {
     await setIsUpdating(true)

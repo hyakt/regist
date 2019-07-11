@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { Container, Content, ListItem, Text, View, StyleProvider } from 'native-base'
 import { FlatList, Image, StyleSheet, AsyncStorage } from 'react-native'
 
-import github from 'app/src/utility/github'
 import getTheme from 'app/native-base-theme/components'
 import platform from 'app/native-base-theme/variables/platform'
 
@@ -21,34 +20,32 @@ export default (props) => {
   }, [navigation._childrenNavigation.Home.getParam('token')])
 
   useEffect(() => {
-    console.log(token)
     setItemList([
       { 'name': 'Sign Out',
         'f': async () => {
-          console.log(await github.revokeAuthorization(token))
           await AsyncStorage.clear()
           await navigation.navigate('AuthLoading')
         }
       }
     ])
-    }, [token])
+  }, [token])
 
   return (
     <StyleProvider style={getTheme(platform)}>
       <Container>
         <Content>
           {user
-           ? <View style={styles.profileContainer}>
-            <Image
-              style={styles.icon}
-              source={{ uri: user.avatar_url }}
-            />
-            <View style={styles.nameContainer}>
-              <Text style={styles.name}>{user.name}</Text>
-              <Text style={styles.loginName}>{user.login}</Text>
+            ? <View style={styles.profileContainer}>
+              <Image
+                style={styles.icon}
+                source={{ uri: user.avatar_url }}
+              />
+              <View style={styles.nameContainer}>
+                <Text style={styles.name}>{user.name}</Text>
+                <Text style={styles.loginName}>{user.login}</Text>
+              </View>
             </View>
-          </View>
-           : <View />
+            : <View />
           }
           <FlatList
             data={itemList}
