@@ -168,10 +168,10 @@ export default (props) => {
           isVisible={isConfirmDelete}
           backdropOpacity={0.8}
           animationIn='zoomInDown'
-          animationOut='zoomOutUp'>
+          animationOut='zoomOutDown'>
           <View style={styles.modalContainer}>
             <Text style={styles.message}>Are you sure?</Text>
-            <View style={{ flex: 1, flexDirection: 'row', marginTop: 20 }}>
+            <View style={styles.modalConfirmContainer}>
               <Button transparent style={{ paddingHorizontal: 20 }} onPress={() => setIsConfirmDelete(false)}>
                 <Text>No</Text>
               </Button>
@@ -214,7 +214,13 @@ const styles = StyleSheet.create({
     width: 300,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'white'
+    alignSelf: 'center',
+    backgroundColor: 'white',
+  },
+  modalConfirmContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    marginTop: 20
   },
   message: {
     fontSize: 18,
