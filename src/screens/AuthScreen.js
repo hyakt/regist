@@ -16,8 +16,10 @@ const { width } = Dimensions.get('window')
 export default (props) => {
   const _fetchToken = async () => {
     const fetchToken = await github.getToken()
-    await AsyncStorage.setItem('token', fetchToken)
-    await props.navigation.navigate('AuthLoading')
+    if (fetchToken) {
+      await AsyncStorage.setItem('token', fetchToken)
+      await props.navigation.navigate('AuthLoading')
+    }
   }
 
   return (
