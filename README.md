@@ -2,7 +2,12 @@
 
 regist is a Gist viewer for smartphone app.
 
-<a href="https://apps.apple.com/us/app/regist/id1472456939?mt=8" style="display:inline-block;overflow:hidden;background:url(https://linkmaker.itunes.apple.com/ja-jp/badge-lrg.svg?releaseDate=2019-08-31&kind=iossoftware&bubble=ios_apps) no-repeat;width:135px;height:40px;"></a>
+<p align="center">
+<a href="https://apps.apple.com/us/app/regist/id1472456939?mt=8">
+ <img alt="Download on the App Store" title="App Store" src="http://i.imgur.com/0n2zqHD.png" width="140">
+</a>
+</p>
+
 
 ## Features
 
@@ -13,8 +18,3 @@ regist is a Gist viewer for smartphone app.
 ## future
 
 - [ ] adopt to android
-
-
-
-
-
