@@ -6,10 +6,6 @@ import { Root } from 'native-base'
 import { Ionicons } from '@expo/vector-icons'
 import AppNavigator from 'app/src/navigation/AppNavigator'
 
-import Sentry from 'sentry-expo'
-// Sentry.enableInExpoDevelopment = true
-Sentry.config('https://a5a80be400e949dd9eb3dd5565b71e29@sentry.io/1502323').install()
-
 export default (props) => {
   const [isLoadingComplete, setLoadingComplete] = useState(false)
 
